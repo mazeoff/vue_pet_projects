@@ -7,15 +7,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="app" class="container pt-5">
+    <div id="app" class="container pt-5" v-cloak>
         <div class="card">
             <h1>{{ title }}</h1>
             <div class="form-control">
                 <input 
                     type="text" 
-                    :placeholder="inputPlaceholder" 
-                    :value="inputValue"
-                    @input="inputChangeHandler"
+                    :placeholder="inputPlaceholder"
+                    v-model="inputValue"
                     @keypress.enter="addNote"
                     />
             </div>
