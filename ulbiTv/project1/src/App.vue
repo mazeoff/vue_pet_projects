@@ -1,6 +1,12 @@
 <template>
     <div class="wrapper">
-        <post-form :posts="posts" @create="createPost"/>
+        <h1>Blog</h1>
+        <block-button @click="showPopUp()">
+            Create Post
+        </block-button>
+        <pop-up v-model:show="popUpCreatePostVisible">
+            <post-form :posts="posts" @create="createPost"/>
+        </pop-up>
         <post-list :posts="posts" @delete="deletePost"/>
     </div>
 </template>
@@ -19,14 +25,19 @@ export default {
                 {id:2, title: 'Post #2', desc: 'Post about life of people in wild nature. Part 2'},
                 {id:3, title: 'Post #3', desc: 'Post about life of people in wild nature. Part 3'},
             ],
+            popUpCreatePostVisible: false
         }
     },
     methods:{
         createPost(post){
             this.posts.push(post);
+            this.popUpCreatePostVisible = false;
         },
         deletePost(post){
             this.posts = this.posts.filter(p => p.id !== post.id)
+        },
+        showPopUp(){
+            this.popUpCreatePostVisible = true;
         }
     }
 }

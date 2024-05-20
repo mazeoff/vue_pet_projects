@@ -42,7 +42,7 @@ export default {
 form{
     display: flex;
     flex-direction: column;
-    border: 20px outset rgb(48, 173, 173);
+    // border: 20px outset rgb(48, 173, 173);
     border-radius: 10px;
     padding: 20px;
 }

@@ -35,6 +35,8 @@ export default {
 
 .post{
     display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
     padding: 15px;
     background-color: rgb(48, 173, 173);
     border-radius: 10px;
