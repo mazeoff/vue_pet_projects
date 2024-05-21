@@ -15,7 +15,7 @@ export default {
             default: false
         }
     },
-    methods: { 
+    methods: {
         hidePopUp(){
             this.$emit('update:show', false)
         }

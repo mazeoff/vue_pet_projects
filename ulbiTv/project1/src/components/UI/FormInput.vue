@@ -25,7 +25,7 @@ export default {
     width: 100%;
     margin: 10px 0;
     padding: 10px;
-    border: 2px solid rgb(48, 173, 173);
+    border: 2px solid rgba(71, 43, 0, 0.32);
     border-radius: 10px;
 }
 </style>

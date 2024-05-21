@@ -1,9 +1,14 @@
 <template>
     <div class="wrapper">
-        <h1>Blog</h1>
-        <block-button @click="showPopUp()">
-            Create Post
-        </block-button>
+        <header>
+            <div class="page-title">
+                <h1>Blog</h1>
+            </div>
+            <block-button @click="showPopUp">
+                Create Post
+            </block-button>
+        </header>
+
         <pop-up v-model:show="popUpCreatePostVisible">
             <post-form :posts="posts" @create="createPost"/>
         </pop-up>
@@ -53,7 +58,14 @@ export default {
 }
     
 .wrapper{
-    padding: 20px;
+    margin: auto 5vw;
+    // padding: 20px;
+}
+
+header{
+    display: flex;
+    margin: 20px 0;
+    justify-content: space-between;
 }
 
 </style>

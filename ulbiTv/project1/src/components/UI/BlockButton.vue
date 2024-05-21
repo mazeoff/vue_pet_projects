@@ -15,20 +15,22 @@ export default {
     cursor: pointer;
     display: flex;
     justify-content: center;
-    border: none;
+    background: transparent;
+    color: rgba(71, 43, 0, 0.32);
+    border: 2px solid rgba(71, 43, 0, 0.32);
     font-weight: 600;
     font-size: 10pt;
     padding: 10px;
     border-radius: 5px;
     &:hover{
         opacity: 0.7;
+        background-color: rgba(71, 43, 0, 0.32);
+        color: aliceblue;
     }
     &_delete{
-        background-color: #ca1313;
         margin: 10px;
     }
     &_edit{
-        background-color: #207373;
         margin: 10px;
     }
     &_create{

@@ -31,17 +31,19 @@ export default {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin: -5px;
 }
 
 .post{
     display: flex;
-    flex-grow: 1;
+    margin: 5px;
+    flex: 1 1 0;
     justify-content: space-between;
     padding: 15px;
-    background-color: rgb(48, 173, 173);
+    background-color: rgb(71 43 0 / 32%);
     border-radius: 10px;
-    margin: 15px;
     color: aliceblue;
     box-shadow: 0px 5px 10px rgb(212, 212, 212);
 }
+
 </style>
