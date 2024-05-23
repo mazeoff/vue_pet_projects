@@ -26,7 +26,19 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.post{
+    display: flex;
+    margin: 5px;
+    // flex: 1 1 0;
+    flex: 1 1 auto;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: rgb(71 43 0 / 32%);
+    border-radius: 10px;
+    color: aliceblue;
+    box-shadow: 0px 5px 10px rgb(212, 212, 212);
+}
 .block__buttons{
     display: flex;
     flex-direction: column;

@@ -25,6 +25,7 @@ export default {
 
 <style lang="scss" scoped>
 .popup{
+    z-index: 1;
     position: fixed;
     display: flex;
     justify-content: center;

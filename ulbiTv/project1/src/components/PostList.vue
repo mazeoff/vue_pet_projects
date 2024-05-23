@@ -1,15 +1,17 @@
 <template>
-    <div class="posts">
-        <post-item
-            v-for="post in posts" 
-            :key="post.id"
-            :post="post"
-            @delete="$emit('delete', post)"
-        />
-        <h3  v-if="posts.length == 0">
-            Nothing there:(
-        </h3>
-    </div>
+    <transition name="switch" mode="out-in" appear>
+            <transition-group name="list"  tag="div" class="posts" v-if="posts.length">
+                <post-item
+                    v-for="post in posts" 
+                    :key="post.id"
+                    :post="post"
+                    @delete="$emit('delete', post)"
+                />
+            </transition-group>
+        <div v-else>
+            <h3>Nothing there:(</h3>
+        </div>
+    </transition>
 </template>
 
 <script>
@@ -28,22 +30,56 @@ export default {
 
 <style lang="scss" scoped>
 .posts{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: center;
     margin: -5px;
 }
 
-.post{
-    display: flex;
-    margin: 5px;
-    flex: 1 1 0;
-    justify-content: space-between;
-    padding: 15px;
-    background-color: rgb(71 43 0 / 32%);
-    border-radius: 10px;
-    color: aliceblue;
-    box-shadow: 0px 5px 10px rgb(212, 212, 212);
+.list{
+    &-move, &-enter-active, &-leave-active{
+        transition: all 0.3s ease;
+    }
+    &-leave{
+        &-from{
+            opacity: 1;
+            transform: scale(1);
+        }
+        &-to{
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        &-active{
+            position: absolute;
+            width: 90vw
+        }
+    }
+    &-enter{
+        &-from{
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        &-to{
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
 }
+
+.switch{
+    &-enter-from, &-leave-to{
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    &-enter-to, &-leave-from{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    &-enter-active, &-leave-active{
+        transition: all 0.3s ease;
+    }
+}
+
 
 </style>
