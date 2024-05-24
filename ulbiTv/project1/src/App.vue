@@ -7,15 +7,22 @@
             <block-button @click="showPopUp">
                 Create Post
             </block-button>
-            <block-button @click="fetchPosts">
-                Add Posts
-            </block-button>
         </header>
 
         <pop-up v-model:show="popUpCreatePostVisible">
             <post-form :posts="posts" @create="createPost"/>
         </pop-up>
-        <post-list :posts="posts" @delete="deletePost"/>
+
+        <div class="filters">
+            <form-input
+                v-model="searchQuery" placeholder="Find..."/>
+            <block-select
+                v-model="selectedSort"
+                :options="sortOptions"/>
+        </div>
+
+        <post-list :posts="sortedAndSearchedPosts" @delete="deletePost" v-if="!isPostsLoading"/>
+        <div v-else>Loading posts...</div>
     </div>
 </template>
 
@@ -29,25 +36,21 @@ export default {
     },
     data(){
         return {
-            posts:[
-                {id:1, title: 'Post #1', desc: 'Post about life of people in wild nature. Part 1'},
-                {id:2, title: 'Post #2', desc: 'Post about life of people in wild nature. Part 2'},
-                {id:3, title: 'Post #3', desc: 'Post about life of people in wild nature. Part 3'},
-                {id:4, title: 'Post #4', desc: 'Post about life of people in wild nature. Part 4'},
-                {id:5, title: 'Post #5', desc: 'Post about life of people in wild nature. Part 5'},
-                {id:6, title: 'Post #6', desc: 'Post about life of people in wild nature. Part 6'},
-                {id:7, title: 'Post #7', desc: 'Post about life of people in wild nature. Part 7'},
-                {id:8, title: 'Post #8', desc: 'Post about life of people in wild nature. Part 8'},
-
+            posts:[],
+            popUpCreatePostVisible: false,
+            isPostsLoading: false,
+            selectedSort: '',
+            sortOptions: [
+                {value: 'title', name: 'By name'},
+                {value: 'body', name: 'By description'}
             ],
-            popUpCreatePostVisible: false
+            searchQuery: ''
         }
     },
     methods:{
         createPost(post){
             this.posts.push(post);
             this.popUpCreatePostVisible = false;
-            console.log(this.posts);
         },
         deletePost(post){
             this.posts = this.posts.filter(p => p.id !== post.id)
@@ -57,12 +60,36 @@ export default {
         },
         async fetchPosts(){
             try {
+                this.isPostsLoading = true;
                 const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
-                console.log(response);
+                this.posts = response.data;
+                console.log(this.posts);
             } catch (error) {
                 alert('Error '+ error);
+            }finally{
+                this.isPostsLoading = false;
             }
         }
+    },
+    mounted(){
+        this.fetchPosts();
+    },
+    computed:{
+        sortedPosts(){
+            return [...this.posts].sort((post1, post2)=> post1[this.selectedSort]?.localeCompare(post2[this.selectedSort]));
+        },
+        sortedAndSearchedPosts(){
+            return this.sortedPosts.filter((post) => {
+                var postTitle = post.title.toLowerCase();
+                var postBody = post.body.toLowerCase();
+                var search = this.searchQuery.toLowerCase();
+                if(postTitle.includes(search) || postBody.includes(search)){
+                   return true;
+                }
+            });
+        }
+    },
+    watch: {
     }
 }
 

@@ -2,7 +2,7 @@
     <div class="post">
         <div class="block__body">
             <div><b>{{post.title}} </b></div>
-            <div>{{post.desc}}</div>
+            <div>{{post.body}}</div>
         </div>
         <div class="block__buttons">
             <block-button class="block__button_edit">

@@ -8,7 +8,7 @@
                     @delete="$emit('delete', post)"
                 />
             </transition-group>
-        <div v-else>
+        <div class="notify" v-else>
             <h3>Nothing there:(</h3>
         </div>
     </transition>
@@ -33,7 +33,15 @@ export default {
     // display: flex;
     // flex-wrap: wrap;
     // justify-content: center;
-    margin: -5px;
+    // margin: -5px;
+    margin: auto 20vw;
+}
+
+.notify{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
 }
 
 .list{
@@ -51,7 +59,6 @@ export default {
         }
         &-active{
             position: absolute;
-            width: 90vw
         }
     }
     &-enter{
