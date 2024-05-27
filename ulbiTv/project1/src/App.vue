@@ -2,9 +2,9 @@
     <div class="wrapper">
         <header>
             <div class="page-title">
-                <h1>Blog</h1>
+                <h1>My Blog</h1>
             </div>
-            <block-button @click="showPopUp">
+            <block-button class="block__button_default" @click="showPopUp">
                 Create Post
             </block-button>
         </header>
@@ -13,26 +13,42 @@
             <post-form :posts="posts" @create="createPost"/>
         </pop-up>
 
-        <div class="filters">
-            <form-input
-                v-model="searchQuery" placeholder="Find..."/>
-            <block-select
-                v-model="selectedSort"
-                :options="sortOptions"/>
-        </div>
+        <filter-form
+        v-model:searchQuery="this.searchQuery"
+        v-model:selectedSort="this.selectedSort"
+        v-model:sortOptions="this.sortOptions"
+            />
 
-        <post-list :posts="sortedAndSearchedPosts" @delete="deletePost" v-if="!isPostsLoading"/>
+        <post-list
+            :posts="sortedAndSearchedPosts"
+            @delete="deletePost"
+            v-if="!isPostsLoading"/>
         <div v-else>Loading posts...</div>
+
+        <div class="page__wrapper">
+            <block-button
+                v-for="page in totalPages"
+                :key="page"
+                class="page"
+                :class="{
+                    'page_current': pageNumber === page
+                }"
+                @click="changePage(page)"
+                >
+                    {{ page }}
+            </block-button>
+        </div>
     </div>
 </template>
 
 <script>
 import PostForm from './components/PostForm.vue';
 import PostList from './components/PostList.vue';
+import FilterForm from './components/FilterForm.vue';
 import axios from 'axios';
 export default {
     components:{
-        PostForm, PostList
+        PostForm, PostList, FilterForm,
     },
     data(){
         return {
@@ -44,7 +60,10 @@ export default {
                 {value: 'title', name: 'By name'},
                 {value: 'body', name: 'By description'}
             ],
-            searchQuery: ''
+            searchQuery: '',
+            pageNumber: 1,
+            limitPosts: 10,
+            totalPages: 1,
         }
     },
     methods:{
@@ -58,12 +77,21 @@ export default {
         showPopUp(){
             this.popUpCreatePostVisible = true;
         },
+        changePage(page){
+            this.pageNumber = page;
+            this.fetchPosts();
+        },
         async fetchPosts(){
             try {
                 this.isPostsLoading = true;
-                const response = await axios.get('https://jsonplaceholder.typicode.com/posts?_limit=10');
+                const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+                   params: {
+                    _page: this.pageNumber,
+                    _limit: this.limitPosts
+                   } 
+                });
+                this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limitPosts);
                 this.posts = response.data;
-                console.log(this.posts);
             } catch (error) {
                 alert('Error '+ error);
             }finally{
@@ -105,13 +133,29 @@ export default {
     
 .wrapper{
     margin: auto 5vw;
-    // padding: 20px;
 }
 
 header{
     display: flex;
     margin: 20px 0;
     justify-content: space-between;
+}
+
+.page{
+    width: 30px;
+    &+&{
+        margin-left: 20px;
+    }
+    &__wrapper{
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    &_current{
+        background-color: rgba(71, 43, 0, 0.32);
+    }
 }
 
 </style>

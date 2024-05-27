@@ -35,6 +35,13 @@ export default {
     // justify-content: center;
     // margin: -5px;
     margin: auto 20vw;
+    position: relative;
+}
+
+.deleted{
+    position: absolute;
+    margin: auto;
+    width: 100%;
 }
 
 .notify{
@@ -59,6 +66,8 @@ export default {
         }
         &-active{
             position: absolute;
+            margin: auto;
+            width: 100%;
         }
     }
     &-enter{

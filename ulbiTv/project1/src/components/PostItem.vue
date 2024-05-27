@@ -5,10 +5,10 @@
             <div>{{post.body}}</div>
         </div>
         <div class="block__buttons">
-            <block-button class="block__button_edit">
+            <block-button class="block__button_default block__button_edit">
                 Edit
             </block-button>
-            <block-button class="block__button_delete" @click="$emit('delete', post)">
+            <block-button class="block__button_default block__button_delete" @click="$emit('delete', post)">
                 Delete
             </block-button>
         </div>
@@ -39,6 +39,7 @@ export default {
     color: aliceblue;
     box-shadow: 0px 5px 10px rgb(212, 212, 212);
 }
+
 .block__buttons{
     display: flex;
     flex-direction: column;

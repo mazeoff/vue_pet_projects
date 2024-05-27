@@ -15,7 +15,6 @@ export default {
     cursor: pointer;
     display: flex;
     justify-content: center;
-    background: transparent;
     color: rgba(71, 43, 0, 0.32);
     border: 2px solid rgba(71, 43, 0, 0.32);
     font-weight: 600;
@@ -27,6 +26,9 @@ export default {
         background-color: rgba(71, 43, 0, 0.32);
         color: aliceblue;
     }
+    &_default{
+        background: transparent;
+    }
     &_delete{
         margin: 10px;
     }
@@ -34,6 +36,7 @@ export default {
         margin: 10px;
     }
     &_create{
+        margin: 0;
         align-self: flex-end;
     }
 }

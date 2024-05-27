@@ -4,7 +4,7 @@
         <form-input v-model="post.title" placeholder="Enter post title"/>
         <form-input v-model="post.body" type="text" placeholder="Enter post description"/>
         <block-button 
-            class="block__button_create"
+            class="block__button_default block__button_create"
             @click="createPost">Create
         </block-button>
     </form>
