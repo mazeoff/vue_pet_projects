@@ -4,51 +4,54 @@
             <div class="page-title">
                 <h1>My Blog</h1>
             </div>
-            <block-button class="block__button_default" @click="showPopUp">
-                Create Post
-            </block-button>
         </header>
 
         <pop-up v-model:show="popUpCreatePostVisible">
             <post-form :posts="posts" @create="createPost"/>
         </pop-up>
 
-        <filter-form
-        v-model:searchQuery="this.searchQuery"
-        v-model:selectedSort="this.selectedSort"
-        v-model:sortOptions="this.sortOptions"
-            />
+        <div class="posts-setting">
+            <block-button class="block__button_default" @click="showPopUp">
+                Create Post
+            </block-button>
+            <form-input
+                v-model="searchQuery" placeholder="Find..."/>
+            <block-select
+                v-model:selectedSort="selectedSort"
+                v-model:options="sortOptions"/>
+        </div>    
 
         <post-list
             :posts="sortedAndSearchedPosts"
             @delete="deletePost"
             v-if="!isPostsLoading"/>
         <div v-else>Loading posts...</div>
+        <div id="load-more-posts"></div>
 
-        <div class="page__wrapper">
+        <!-- <div class="pagination__wrapper">
             <block-button
                 v-for="page in totalPages"
                 :key="page"
-                class="page"
+                class="pagination"
                 :class="{
-                    'page_current': pageNumber === page
+                    'pagination_current-page': pageNumber === page
                 }"
                 @click="changePage(page)"
                 >
                     {{ page }}
             </block-button>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
 import PostForm from './components/PostForm.vue';
 import PostList from './components/PostList.vue';
-import FilterForm from './components/FilterForm.vue';
+// import FilterForm from './components/FilterForm.vue';
 import axios from 'axios';
 export default {
     components:{
-        PostForm, PostList, FilterForm,
+        PostForm, PostList,
     },
     data(){
         return {
@@ -77,10 +80,9 @@ export default {
         showPopUp(){
             this.popUpCreatePostVisible = true;
         },
-        changePage(page){
-            this.pageNumber = page;
-            this.fetchPosts();
-        },
+        // changePage(page){
+        //     this.pageNumber = page;
+        // },
         async fetchPosts(){
             try {
                 this.isPostsLoading = true;
@@ -97,10 +99,36 @@ export default {
             }finally{
                 this.isPostsLoading = false;
             }
+        },
+        async loadMorePosts(){
+            try {
+                this.isPostsLoading = true;
+                const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+                   params: {
+                    _page: this.pageNumber,
+                    _limit: this.limitPosts
+                   } 
+                });
+                this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limitPosts);
+                this.posts = [...this.posts, ...response.data];
+            } catch (error) {
+                alert('Error '+ error);
+            }finally{
+                this.isPostsLoading = false;
+            }
         }
     },
     mounted(){
         this.fetchPosts();
+        var options = {
+        root: document.querySelector("#scrollArea"),
+        rootMargin: "0px",
+        threshold: 1.0,
+        };
+        var callback = function (entries, observer) {
+        /* Content excerpted, show below */
+        };
+        var observer = new IntersectionObserver(callback, options);
     },
     computed:{
         sortedPosts(){
@@ -118,6 +146,9 @@ export default {
         }
     },
     watch: {
+        // pageNumber(){
+        //    this.fetchPosts(); 
+        // }
     }
 }
 
@@ -141,7 +172,7 @@ header{
     justify-content: space-between;
 }
 
-.page{
+.pagination{
     width: 30px;
     &+&{
         margin-left: 20px;
@@ -153,9 +184,13 @@ header{
         margin-bottom: 15px;
     }
 
-    &_current{
+    &_current-page{
         background-color: rgba(71, 43, 0, 0.32);
     }
+}
+
+.filter{
+    margin: auto 20vw;
 }
 
 </style>

@@ -1,5 +1,7 @@
 <template>
-    <select :value="modelValue" @change="changeOption">
+    <select
+    :value="selectedSort"
+    @change="changeOption">
         <option disabled value="">Select from list</option>
         <option 
             v-for="option in options"
@@ -8,15 +10,14 @@
                 {{ option.name }}
         </option>
     </select>
-  
 </template>
 
 <script>
 export default {
     name: 'block-select',
     props:{
-        modelValue:{
-            type: String
+        selectedSort:{
+            type: String,
         },
         options:{
             type: Array,
@@ -25,7 +26,7 @@ export default {
     },
     methods: {
         changeOption(event){
-            this.$emit('update:modelValue', event.target.value);
+            this.$emit('update:selectedSort', event.target.value);
         }
     }
 }

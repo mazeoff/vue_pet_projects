@@ -1,5 +1,6 @@
 <template>
     <div class="post">
+        <div>{{ post.id }}</div>
         <div class="block__body">
             <div><b>{{post.title}} </b></div>
             <div>{{post.body}}</div>
