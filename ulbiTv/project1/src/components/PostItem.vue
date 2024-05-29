@@ -30,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 .post{
     display: flex;
-    margin: 5px;
+    margin: 5px 0;
     // flex: 1 1 0;
     flex: 1 1 auto;
     justify-content: space-between;
