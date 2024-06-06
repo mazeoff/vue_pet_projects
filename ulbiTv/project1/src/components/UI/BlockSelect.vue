@@ -38,7 +38,7 @@ select{
     // width: 100%;
     margin: 10px 0;
     padding: 10px;
-    border: 2px solid rgba(71, 43, 0, 0.32);
+    border: 2px solid $main-color;
     border-radius: 10px;
     background-color: transparent;
 }

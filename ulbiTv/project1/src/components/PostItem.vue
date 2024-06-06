@@ -6,8 +6,8 @@
             <div>{{post.body}}</div>
         </div>
         <div class="block__buttons">
-            <block-button class="block__button_default block__button_edit">
-                Edit
+            <block-button class="block__button_default block__button_details" @click="$router.push(`/posts/${post.id}`)">
+                Details
             </block-button>
             <block-button class="block__button_default block__button_delete" @click="$emit('delete', post)">
                 Delete
@@ -35,10 +35,10 @@ export default {
     flex: 1 1 auto;
     justify-content: space-between;
     padding: 15px;
-    background-color: rgb(71 43 0 / 32%);
+    background-color: $main-color;
     border-radius: 10px;
     color: aliceblue;
-    box-shadow: 0px 5px 10px rgb(212, 212, 212);
+    box-shadow: $box-shadow;
 }
 
 .block__buttons{

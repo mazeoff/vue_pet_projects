@@ -1,17 +1,18 @@
 <template>
+    <div class="header">
+        <navbar-item></navbar-item>
+    </div>
     <div class="app-wrapper">
-        <header>
-            <div class="page-title">
-                <h1>My Blog</h1>
-            </div>
-        </header>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
+import NavbarItem from "@/components/NavbarItem"
 export default {
-
+    components:{
+        NavbarItem
+    }
 }
 
 </script>
@@ -28,10 +29,8 @@ export default {
     margin: auto 5vw;
 }
 
-header{
-    display: flex;
-    margin: 20px 0;
-    justify-content: space-between;
+.header{
+    margin-bottom: 20px;
 }
 
 </style>

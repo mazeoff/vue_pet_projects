@@ -1,7 +1,9 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
 import Main from "@/pages/Main";
 import Posts from "@/pages/Posts";
+import Post from "@/pages/Post";
 import About from "@/pages/About";
+
 
 const routes = [
     {
@@ -13,14 +15,19 @@ const routes = [
         component: Posts
     },
     {
+        path: '/posts/:id',
+        component: Post
+    },
+    {
         path: '/about',
         component: About
-    }
+    },
+
 ];
 
 const router = createRouter({
     routes,
-    history: createWebHashHistory(process.env.BASE_URL)
+    history: createWebHistory(process.env.BASE_URL)
 });
 
 export default router;

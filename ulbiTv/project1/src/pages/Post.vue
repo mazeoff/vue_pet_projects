@@ -1,15 +1,15 @@
 <template>
-	<div>
-    	<h1>Welcome to My Blog</h1>
-  	</div>
+  <div>
+    <h1>
+        Post # {{ $route.params.id }}
+    </h1>
+  </div>
 </template>
 
 <script>
-
 export default {
 
 }
-
 </script>
 
 <style>

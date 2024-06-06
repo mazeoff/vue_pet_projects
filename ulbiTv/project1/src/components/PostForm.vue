@@ -1,7 +1,7 @@
 <template>
     <form @submit.prevent>
         <h4>Post creating:</h4>
-        <form-input v-model="post.title" placeholder="Enter post title"/>
+        <form-input v-focus v-model="post.title" placeholder="Enter post title"/>
         <form-input v-model="post.body" type="text" placeholder="Enter post description"/>
         <block-button 
             class="block__button_default block__button_create"
@@ -30,7 +30,7 @@ export default {
         createPost(){
             if(this.post.title !== '' || this.post.body !== ''){
                 this.post.id = this.posts.length+1;
-                this.$emit('create',this.post);
+                this.$emit('create', this.post);
                 this.post = {title: '', body: ''}
             }
         }

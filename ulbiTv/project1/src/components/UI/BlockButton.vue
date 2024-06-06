@@ -15,15 +15,15 @@ export default {
     cursor: pointer;
     display: flex;
     justify-content: center;
-    color: rgba(71, 43, 0, 0.32);
-    border: 2px solid rgba(71, 43, 0, 0.32);
+    color:$main-color;
+    border: 2px solid $main-color;
     font-weight: 600;
     font-size: 10pt;
     padding: 10px;
     border-radius: 5px;
     &:hover{
         opacity: 0.7;
-        background-color: rgba(71, 43, 0, 0.32);
+        background-color: $main-color;
         color: aliceblue;
     }
     &_default{
@@ -33,6 +33,9 @@ export default {
         margin: 10px;
     }
     &_edit{
+        margin: 10px;
+    }
+    &_details{
         margin: 10px;
     }
     &_create{

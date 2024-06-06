@@ -20,7 +20,7 @@
             @delete="deletePost"
             v-if="!isPostsLoading"/>
         <div v-else>Loading posts...</div>
-        <div ref="loadMorePosts" id="load-more-posts"></div>
+        <div v-intersection="loadMorePosts" id="load-more-posts"></div>
 
         <!-- <div class="pagination__wrapper">
             <block-button
@@ -65,7 +65,7 @@ export default {
     },
     methods:{
         createPost(post){
-            this.posts.push(post);
+            this.posts.unshift(post);
             this.popUpCreatePostVisible = false;
         },
         deletePost(post){
@@ -113,18 +113,6 @@ export default {
     },
     mounted(){
         this.fetchPosts();
-
-        const options = {
-            rootMargin: "0px",
-            threshold: 1.0,
-        };
-        const callback = (entries, observer) => {
-            if(entries[0].isIntersecting && this.pageNumber < this.totalPages){
-                this.loadMorePosts();
-            }
-        };
-        const observer = new IntersectionObserver(callback, options);
-        observer.observe(this.$refs.loadMorePosts);
     },
     computed:{
         sortedPosts(){
