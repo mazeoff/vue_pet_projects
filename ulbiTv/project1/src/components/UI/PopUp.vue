@@ -7,19 +7,10 @@
 </template>
 
 <script>
+import toggleMixin from "@/mixins/toggleMixin"
 export default {
     name: 'pop-up',
-    props:{
-        show:{
-            type: Boolean,
-            default: false
-        }
-    },
-    methods: {
-        hidePopUp(){
-            this.$emit('update:show', false)
-        }
-    },
+    mixins: [toggleMixin],
 }
 </script>
 

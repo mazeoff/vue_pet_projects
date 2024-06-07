@@ -8,6 +8,12 @@
             <block-button class="navbar__button" @click="$router.push('/about')">
                 About
             </block-button>
+            <block-button class="navbar__button" @click="$router.push('/storage')">
+                Storage Posts
+            </block-button>
+            <block-button class="navbar__button" @click="$router.push('/composition')">
+                Composition Posts
+            </block-button>
         </div>
     </div>
 </template>

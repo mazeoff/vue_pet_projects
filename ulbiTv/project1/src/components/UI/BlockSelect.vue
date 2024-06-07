@@ -4,14 +4,13 @@
     @change="changeOption">
         <option disabled value="">Select from list</option>
         <option 
-            v-for="option in options"
+            v-for="option in sortOptions"
             :key="option.value"
             :value="option.value">
                 {{ option.name }}
         </option>
     </select>
 </template>
-
 <script>
 export default {
     name: 'block-select',
@@ -19,7 +18,7 @@ export default {
         selectedSort:{
             type: String,
         },
-        options:{
+        sortOptions:{
             type: Array,
             default: () => []
         }
