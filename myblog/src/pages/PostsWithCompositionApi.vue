@@ -11,23 +11,29 @@
             <form-input
                 v-model="searchQuery" placeholder="Find..."/>
             <block-select
-                v-model:selectedSort="selectedSort"
-                v-model:options="sortOptions"/>
+            v-model:selectedSort="selectedSort"
+            v-model:sortOptions="sortOptions"/>
         </div>    
 
         <post-list
             :posts="sortedAndSearchedPosts"
             @delete="deletePost"
             v-if="!isPostsLoading"/>
-        <div v-else>Loading posts...</div>
-        <div v-intersection="loadMorePosts" id="load-more-posts"></div>
+        <div v-else>
+            <loader-item/>
+        </div>
+        <!-- <div v-intersection="loadMorePosts" id="load-more-posts"></div> -->
     </div>
 </template>
 
 <script>
 import PostForm from '@/components/PostForm.vue';
 import PostList from '@/components/PostList.vue';
-// import usePosts from '@/hooks/usePosts.js';
+
+import usePosts from '@/hooks/usePosts.js';
+import useSortedPosts from '@/hooks/useSortedPosts';
+import useSortedAndSearchedPosts from '@/hooks/useSortedAndSearchedPosts';
+
 export default {
     components:{
         PostForm, PostList,
@@ -42,7 +48,20 @@ export default {
         }
     },
     setup(props){
-        const {posts, totalPage, isPostsLoading} = usePosts(10);
+        const {posts, totalPages, isPostsLoading} = usePosts(10);
+        const {sortedPosts, selectedSort} = useSortedPosts(posts);
+        const {searchQuery, sortedAndSearchedPosts} = useSortedAndSearchedPosts(sortedPosts);
+
+        return {
+            posts,
+            totalPages,
+            isPostsLoading,
+            sortedPosts,
+            selectedSort,
+            searchQuery,
+            sortedAndSearchedPosts
+        }
+
     }
 }
 

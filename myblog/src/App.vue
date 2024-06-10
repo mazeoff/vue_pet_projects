@@ -24,13 +24,19 @@ export default {
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
 }
-    
-.app-wrapper{
-    margin: auto 5vw;
+
+html, body{
+    height: 100%;
 }
 
-.header{
-    margin-bottom: 20px;
+#app{
+    height: 100%;
+}
+    
+.app-wrapper{
+    height: 100%;
+    padding-top: 20px;
+    // margin: auto 5vw;
 }
 
 </style>

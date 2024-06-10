@@ -3,16 +3,16 @@
         <div class="navbar__title" @click="$router.push('/')"><h1>My Blog</h1></div>
         <div class="navbar__buttons">
             <block-button class="navbar__button" @click="$router.push('/posts')">
-                Posts
-            </block-button>
-            <block-button class="navbar__button" @click="$router.push('/about')">
-                About
+                <h3>Props Posts</h3>
             </block-button>
             <block-button class="navbar__button" @click="$router.push('/storage')">
-                Storage Posts
+                <h3>Storage Posts</h3>
             </block-button>
             <block-button class="navbar__button" @click="$router.push('/composition')">
-                Composition Posts
+                <h3>Composition Posts</h3>
+            </block-button>
+            <block-button class="navbar__button" @click="$router.push('/about')">
+                <h3>About</h3>
             </block-button>
         </div>
     </div>
@@ -29,7 +29,7 @@ export default {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 15px;
+        padding: 15px 5vw;
         width: 100%;
         background-color: $main-color;
         box-shadow: $box-shadow;
