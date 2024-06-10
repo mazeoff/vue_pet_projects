@@ -52,7 +52,8 @@ export default {
         }),
         ...mapActions({
             loadMorePosts: 'post/loadMorePosts',
-            fetchPosts: 'post/fetchPosts'
+            fetchPosts: 'post/fetchPosts',
+            // deletePost: 'post/deletePost'
         }),
         createPost(post){
             this.posts.unshift(post);

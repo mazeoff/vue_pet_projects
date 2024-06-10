@@ -1,7 +1,9 @@
 <template>
-    <button class="block__button">
-        <slot></slot>
-    </button>
+    <transition name="fade" appear>
+        <button class="block__button">
+            <slot></slot>
+        </button>
+    </transition>
 </template>
 
 <script>

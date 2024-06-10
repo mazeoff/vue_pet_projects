@@ -1,9 +1,11 @@
 <template>
-  <div class="popup" v-if="show" @click="hidePopUp">
-    <div @click.stop class="popup__content">
-        <slot></slot>
+  <transition name="fade" appear>
+    <div class="popup" v-if="show" @click="hidePopUp">
+      <div @click.stop class="popup__content">
+          <slot></slot>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script>

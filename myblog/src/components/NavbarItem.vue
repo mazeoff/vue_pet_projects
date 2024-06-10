@@ -6,10 +6,10 @@
                 <h3>Props Posts</h3>
             </block-button>
             <block-button class="navbar__button" @click="$router.push('/storage')">
-                <h3>Storage Posts</h3>
+                <h3>Storage(Vuex) Posts</h3>
             </block-button>
             <block-button class="navbar__button" @click="$router.push('/composition')">
-                <h3>Composition Posts</h3>
+                <h3>Composition API Posts</h3>
             </block-button>
             <block-button class="navbar__button" @click="$router.push('/about')">
                 <h3>About</h3>

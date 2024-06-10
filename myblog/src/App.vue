@@ -30,6 +30,8 @@ html, body{
 }
 
 #app{
+    display: flex;
+    flex-direction: column;
     height: 100%;
 }
     
@@ -37,6 +39,17 @@ html, body{
     height: 100%;
     padding-top: 20px;
     // margin: auto 5vw;
+}
+
+.fade{
+	&-enter-active,
+	&-leave-active{
+		transition: opacity 0.5s ease;
+	}
+	&-enter-from,
+	&-leave-active{
+		opacity: 0;
+	}
 }
 
 </style>

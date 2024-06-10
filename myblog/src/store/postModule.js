@@ -50,6 +50,14 @@ export const postModule = {
         
     },
     actions: {
+        deletePost({state, commit}){
+            try {
+                state.posts = state.posts.filter(p => p.id !== state.post.id);
+                commit('setPosts', state.posts);
+            } catch (error) {
+                console.log("Component ERROR: ", error);
+            }
+        },
         async fetchPosts({state, commit}){
             try {
                 commit('setPostsLoading', true);

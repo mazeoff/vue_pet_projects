@@ -1,5 +1,5 @@
 <template>
-  <div class="loader__wrapper">
+    <div class="loader__wrapper">
         <div class="loader">
             <div class="loader__item"></div>
             <div class="loader__item"></div>

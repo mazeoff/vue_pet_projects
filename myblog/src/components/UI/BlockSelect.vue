@@ -1,4 +1,5 @@
 <template>
+    <transition name="fade" appear>
     <select
     :value="selectedSort"
     @change="changeOption">
@@ -10,6 +11,7 @@
                 {{ option.name }}
         </option>
     </select>
+    </transition>
 </template>
 <script>
 export default {

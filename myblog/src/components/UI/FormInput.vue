@@ -1,9 +1,11 @@
 <template>
+    <transition name="fade" appear>
   <input
     class="form-input"
     type="text"
     :value="modelValue"
     @input="updateInput">
+    </transition>
 </template>
 
 <script>
