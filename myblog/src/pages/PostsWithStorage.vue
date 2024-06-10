@@ -26,7 +26,7 @@
         <div v-else>
             <loader-item/>
         </div>
-        <div v-intersection="loadMorePosts" id="load-more-posts"></div>
+        <div v-if="!isPostsLoading" v-intersection="loadMorePosts" id="load-more-posts"></div>
     </div>
 </template>
 
@@ -53,14 +53,11 @@ export default {
         ...mapActions({
             loadMorePosts: 'post/loadMorePosts',
             fetchPosts: 'post/fetchPosts',
-            // deletePost: 'post/deletePost'
+            deletePost: 'post/deletePost'
         }),
         createPost(post){
             this.posts.unshift(post);
             this.popUpCreatePostVisible = false;
-        },
-        deletePost(post){
-            this.posts = this.posts.filter(p => p.id !== post.id)
         },
         showPopUp(){
             this.popUpCreatePostVisible = true;

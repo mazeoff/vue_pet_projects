@@ -50,9 +50,9 @@ export const postModule = {
         
     },
     actions: {
-        deletePost({state, commit}){
+        deletePost({state, commit}, post){
             try {
-                state.posts = state.posts.filter(p => p.id !== state.post.id);
+                state.posts = state.posts.filter(p => p.id !== post.id);
                 commit('setPosts', state.posts);
             } catch (error) {
                 console.log("Component ERROR: ", error);
@@ -61,6 +61,7 @@ export const postModule = {
         async fetchPosts({state, commit}){
             try {
                 commit('setPostsLoading', true);
+                console.log(state.pageNumber);
                 const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
                    params: {
                     _page: state.pageNumber,
@@ -78,6 +79,7 @@ export const postModule = {
             }
         },
         async loadMorePosts({state, commit}){
+            console.log('loadMorePosts');
             try {
                 commit('setPageNumber', state.pageNumber+1);
                 const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
