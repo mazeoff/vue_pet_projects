@@ -61,7 +61,6 @@ export const postModule = {
         async fetchPosts({state, commit}){
             try {
                 commit('setPostsLoading', true);
-                console.log(state.pageNumber);
                 const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
                    params: {
                     _page: state.pageNumber,
@@ -79,7 +78,6 @@ export const postModule = {
             }
         },
         async loadMorePosts({state, commit}){
-            console.log('loadMorePosts');
             try {
                 commit('setPageNumber', state.pageNumber+1);
                 const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {

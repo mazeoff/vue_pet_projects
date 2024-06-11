@@ -26,7 +26,8 @@
         <div v-else>
             <loader-item/>
         </div>
-        <div v-if="!isPostsLoading" v-intersection="loadMorePosts" id="load-more-posts"></div>
+        <div  v-intersection id="load-more-posts"></div>
+        
     </div>
 </template>
 

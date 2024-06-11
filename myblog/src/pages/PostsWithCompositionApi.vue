@@ -22,7 +22,7 @@
         <div v-else>
             <loader-item/>
         </div>
-        <!-- <div v-intersection="loadMorePosts" id="load-more-posts"></div> -->
+        <div v-if="!isPostsLoading" v-intersection="loadMorePosts" id="load-more-posts"></div>
     </div>
 </template>
 
@@ -30,7 +30,7 @@
 import PostForm from '@/components/PostForm.vue';
 import PostList from '@/components/PostList.vue';
 
-import usePosts from '@/hooks/usePosts.js';
+import usePosts from '@/hooks/usePosts';
 import useSortedPosts from '@/hooks/useSortedPosts';
 import useSortedAndSearchedPosts from '@/hooks/useSortedAndSearchedPosts';
 
@@ -48,7 +48,7 @@ export default {
         }
     },
     setup(props){
-        const {posts, totalPages, isPostsLoading} = usePosts(10);
+        const {posts, totalPages, isPostsLoading, loadMorePosts} = usePosts(10);
         const {sortedPosts, selectedSort} = useSortedPosts(posts);
         const {searchQuery, sortedAndSearchedPosts} = useSortedAndSearchedPosts(sortedPosts);
 
@@ -56,12 +56,12 @@ export default {
             posts,
             totalPages,
             isPostsLoading,
+            loadMorePosts,
             sortedPosts,
             selectedSort,
             searchQuery,
             sortedAndSearchedPosts
         }
-
     }
 }
 

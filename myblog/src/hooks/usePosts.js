@@ -3,14 +3,15 @@ import axios from "axios";
 
 export default function usePosts(limitPosts){
     const posts = ref([]);
-    const totalPages = ref(0);
+    const pageNumber = ref(1);
+    const totalPages = ref(1);
     const isPostsLoading = ref(true);
 
     const fetching = async () => {
         try {
             const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
                 params: {
-                _page: 1,
+                _page: pageNumber.value,
                 _limit: limitPosts
                 } 
             });
@@ -23,9 +24,29 @@ export default function usePosts(limitPosts){
         }
     }
 
+    const loadMorePosts = async () => {
+        try {
+            console.log(pageNumber.value);
+            pageNumber.value++;
+            const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
+                params: {
+                _page: pageNumber.value,
+                _limit: limitPosts
+                } 
+            });
+            totalPages.value = Math.ceil(response.headers['x-total-count'] / limitPosts);
+            posts.value = response.data;
+            posts.value = [...posts.value, ...response.data];
+        } catch (error) {
+            alert('Error '+ error);
+        }finally{
+            isPostsLoading.value = false;
+        }
+    }
+
     onMounted(fetching);
 
     return {
-        posts, isPostsLoading, totalPages
+        posts, totalPages, isPostsLoading, loadMorePosts
     }
 }

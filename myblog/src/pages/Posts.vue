@@ -23,6 +23,7 @@
             <loader-item/>
         </div>
         <!-- <div v-intersection="loadMorePosts" id="load-more-posts"></div> -->
+        <div v-intersection="{name: 'gleb'}" id="load-more-posts"></div> 
 
         <pagination-item
             v-model:totalPages="totalPages"
