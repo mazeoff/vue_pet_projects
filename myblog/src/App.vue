@@ -52,4 +52,12 @@ html, body{
 	}
 }
 
+.posts-setting{
+    margin: auto 20vw;
+}
+
+#load-more-posts{
+    height: 1px;
+}
+
 </style>

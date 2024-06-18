@@ -48,12 +48,13 @@ export default {
         }
     },
     setup(props){
-        const {posts, totalPages, isPostsLoading, loadMorePosts} = usePosts(10);
+        const {posts, pageNumber, totalPages, isPostsLoading, loadMorePosts} = usePosts(10);
         const {sortedPosts, selectedSort} = useSortedPosts(posts);
         const {searchQuery, sortedAndSearchedPosts} = useSortedAndSearchedPosts(sortedPosts);
 
         return {
             posts,
+            pageNumber,
             totalPages,
             isPostsLoading,
             loadMorePosts,
@@ -69,25 +70,5 @@ export default {
 
 <style lang="scss" scoped>
 
-.pagination{
-    width: 30px;
-    &+&{
-        margin-left: 20px;
-    }
-    &__wrapper{
-        display: flex;
-        justify-content: center;
-        margin-top: 15px;
-        margin-bottom: 15px;
-    }
-
-    &_current-page{
-        background-color: rgba(71, 43, 0, 0.32);
-    }
-}
-
-.posts-setting{
-    margin: auto 20vw;
-}
 
 </style>

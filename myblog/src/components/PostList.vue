@@ -30,11 +30,12 @@ export default {
 
 <style lang="scss" scoped>
 .posts{
-    // display: flex;
+    display: flex;
+    flex-direction: column;
     // flex-wrap: wrap;
     // justify-content: center;
     // margin: -5px;
-    margin: auto 20vw;
+    padding: 20px 20vw;
     position: relative;
 }
 

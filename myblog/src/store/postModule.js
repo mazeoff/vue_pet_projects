@@ -63,7 +63,7 @@ export const postModule = {
                 commit('setPostsLoading', true);
                 const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
                    params: {
-                    _page: state.pageNumber,
+                    _page: 1,
                     _limit: state.limitPosts
                    } 
                 });

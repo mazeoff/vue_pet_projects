@@ -17,7 +17,8 @@ export default function usePosts(limitPosts){
             });
             totalPages.value = Math.ceil(response.headers['x-total-count'] / limitPosts);
             posts.value = response.data;
-        } catch (error) {
+            console.log("usePosts: Posts = ",posts.value);
+        }catch (error) {
             alert('Error '+ error);
         }finally{
             isPostsLoading.value = false;
@@ -26,13 +27,13 @@ export default function usePosts(limitPosts){
 
     const loadMorePosts = async () => {
         try {
-            console.log(pageNumber.value);
+            console.log("loadMorePosts ",posts.value);
             pageNumber.value++;
             const response = await axios.get('https://jsonplaceholder.typicode.com/posts', {
                 params: {
                 _page: pageNumber.value,
                 _limit: limitPosts
-                } 
+                }
             });
             totalPages.value = Math.ceil(response.headers['x-total-count'] / limitPosts);
             posts.value = response.data;
@@ -47,6 +48,6 @@ export default function usePosts(limitPosts){
     onMounted(fetching);
 
     return {
-        posts, totalPages, isPostsLoading, loadMorePosts
+        posts, pageNumber, totalPages, isPostsLoading, loadMorePosts
     }
 }
